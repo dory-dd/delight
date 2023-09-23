@@ -1,0 +1,27 @@
+version: '3'
+
+services:
+  nginx:
+    build:
+      context: ./
+      dockerfile: nginx.dockerfile  # NginxのDockerfileのパスを指定
+    container_name: nginx
+    ports:
+      - ${APP_PORT:-8080}:80
+    volumes:
+      - .:/var/www/html:cached
+    networks:
+      - mynetwork
+
+  php-fpm:
+    build:
+      context: ./
+      dockerfile: php-fpm.dockerfile  # PHP-FPMのDockerfileのパスを指定
+    container_name: php-fpm
+    volumes:
+     - .:/var/www/html:cached
+    networks:
+      - mynetwork
+
+networks:
+  mynetwork:

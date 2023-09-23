@@ -1,0 +1,3 @@
+<Files ~ "\.cgi$">
+deny from all
+</Files>
